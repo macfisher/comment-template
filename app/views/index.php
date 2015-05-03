@@ -38,7 +38,38 @@
 	</div>
 	
 	<!-- NEW COMMENT FORM -->
+	<form ng-submit="submitComment()"> <!-- override default submit and use submitComment() -->
+		
+		<!-- AUTHOR -->
+		<div class="form-group">
+			<input type="text" class="form-control input-sm" name="author" ng-model="commentData.author" placeholder="Name">
+		</div>
+		
+		<!-- COMMENT TEXT -->
+		<div class="form-group">
+			<input type="text" class="form-control input-lg" name="comment" ng-model="commentData.text" placeholder="Leave comment.">
+		</div>
+		
+		<!-- SUBMIT BUTTON -->
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+		</div>
+	</form>
 	
+	<!-- LOADING ICON -->
+	<!-- show if loading var set to true -->
+	<p class="text-center" ng-show="loading">
+		<span class="fa fa-meh-o fa-5x fa-spin"></span>
+	</p>
+	
+	<!-- THE COMMENTS -->
+	<!-- hide these comments if the loading var is set to true -->
+	<div class="comment" ng-hide="loading" ng-repeat="comment in comments">
+		<h3>Comment #{{ comment.id }} <small>by {{ comment.author }}</small></h3>
+		<p>{{ comment.text }}</p>
+		
+		<p><a href="#" ng-click="deleteComment(comment.id)" class="text-muted">Delete</a></p>
+	</div>
 </div>
 </body>
 
